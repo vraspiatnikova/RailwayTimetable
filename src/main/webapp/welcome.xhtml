@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<html xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core">
+
+<h:head>
+    <title>Stations</title>
+    <h:outputStylesheet library="css" name="bootstrap.min.css"/>
+</h:head>
+<h:body>
+    <h1>Choose a station to get timetable</h1>
+        <h:form>
+            <h:dataTable value="#{stationController.stations}" var="station"
+                         styleClass="table">
+                <h:column>
+                    <h:commandLink action="#{boardController.setStationName(station)}">
+                        <h:outputText value="#{station}" rendered="#{true}"/>
+                    </h:commandLink>
+                </h:column>
+            </h:dataTable>
+        </h:form>
+</h:body>
+
+</html>

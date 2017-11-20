@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+<h:head>
+    <title>Board</title>
+    <h:outputStylesheet library="css" name="bootstrap.min.css"/>
+    <h:outputStylesheet library="css" name="departure-board.css"/>
+</h:head>
+
+<h:body>
+
+    <h:form id="form">
+
+        <h:inputHidden id="hiddenStationName" value="#{boardController.stationName}"/>
+
+        <ui:repeat value="#{boardController.getBoards()}" var="board" id="table">
+            <h:inputHidden id="hiddenTrainName" value="#{board.trainName}"/>
+            <h:inputHidden id="hiddenRoute" value="#{board.route}"/>
+            <h:inputHidden id="hiddenDepatureDateTime" value="#{board.depatureDateTime}"/>
+            <h:inputHidden id="hiddenArrivaDatelTime" value="#{board.arrivaDatelTime}"/>
+        </ui:repeat>
+
+    </h:form>
+
+    <div class="departure-board">
+        <div id="stationName"></div>
+        <div id="trainName"></div><div id="route"></div><div id="depatureDateTime"></div><div id="arrivaDatelTime"></div>
+        <div id="trainName0"></div><div id="route0"></div><div id="arrivaDatelTime0"></div><div id="depatureDateTime0"></div>
+        <div id="trainName1"></div><div id="route1"></div><div id="arrivaDatelTime1"></div><div id="depatureDateTime1"></div>
+        <div id="trainName2"></div><div id="route2"></div><div id="arrivaDatelTime2"></div><div id="depatureDateTime2"></div>
+        <div id="trainName3"></div><div id="route3"></div><div id="arrivaDatelTime3"></div><div id="depatureDateTime3"></div>
+        <div id="trainName4"></div><div id="route4"></div><div id="arrivaDatelTime4"></div><div id="depatureDateTime4"></div>
+        <div id="trainName5"></div><div id="route5"></div><div id="arrivaDatelTime5"></div><div id="depatureDateTime5"></div>
+        <div id="trainName6"></div><div id="route6"></div><div id="arrivaDatelTime6"></div><div id="depatureDateTime6"></div>
+        <div id="trainName7"></div><div id="route7"></div><div id="arrivaDatelTime7"></div><div id="depatureDateTime7"></div>
+        <div id="trainName8"></div><div id="route8"></div><div id="arrivaDatelTime8"></div><div id="depatureDateTime8"></div>
+        <div id="trainName9"></div><div id="route9"></div><div id="arrivaDatelTime9"></div><div id="depatureDateTime9"></div>
+    </div>
+
+    <h:form>
+        <h:commandButton styleClass="btn" action="welcome" value="Go back to station selection" />
+    </h:form>
+
+    <script type="text/javascript">
+        function socketListener(message, channel, event) {
+            console.log(message);
+            window.location.reload();
+            updateScript();
+        }
+    </script>
+
+    <f:websocket channel="push" scope="application" onmessage="socketListener"/>
+
+    <h:outputScript library="js" name="jquery.js" target="body"/>
+    <h:outputScript library="js" name="departure-board.js" target="body"/>
+    <h:outputScript library="js" name="demo2.js" target="body"/>
+    <h:outputScript library="js" name="updateScript.js" target="body"/>
+
+</h:body>
+</html>
