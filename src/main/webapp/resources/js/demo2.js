@@ -1,4 +1,6 @@
-$(document).ready(function () {
+$(document).ready(updateScript());
+
+function updateScript() {
 
     var station = new DepartureBoard(document.getElementById('stationName'), { rowCount: 1, letterCount: 78 });
     var element = document.getElementById('form:hiddenStationName');
@@ -218,4 +220,4 @@ $(document).ready(function () {
     if (aelement9 != null) {
         arrivaDatelTime9.setValue(aelement9.value);
     }
-});
+}

@@ -12,11 +12,10 @@
 </h:head>
 
 <h:body>
-
+<div id="divId">
     <h:form id="form">
 
         <h:inputHidden id="hiddenStationName" value="#{boardController.stationName}"/>
-
         <ui:repeat value="#{boardController.getBoards()}" var="board" id="table">
             <h:inputHidden id="hiddenTrainName" value="#{board.trainName}"/>
             <h:inputHidden id="hiddenRoute" value="#{board.route}"/>
@@ -40,25 +39,27 @@
         <div id="trainName8"></div><div id="route8"></div><div id="arrivaDatelTime8"></div><div id="depatureDateTime8"></div>
         <div id="trainName9"></div><div id="route9"></div><div id="arrivaDatelTime9"></div><div id="depatureDateTime9"></div>
     </div>
-
+</div>
     <h:form>
         <h:commandButton styleClass="btn" action="welcome" value="Go back to station selection" />
     </h:form>
-
-    <script type="text/javascript">
-        function socketListener(message, channel, event) {
-            console.log(message);
-            window.location.reload();
-            updateScript();
-        }
-    </script>
+    <!--<script type="text/javascript">-->
+        <!--function socketListener() {-->
+<!--//            $('#divId').load(window.location.href + '#divId', updateScript());-->
+            <!--$(window).load(updateScript());-->
+    <!--}-->
+    <!--</script>-->
 
     <f:websocket channel="push" scope="application" onmessage="socketListener"/>
+    <!--<f:websocket channel="push">-->
+        <!--<f:ajax event="updateTable" render="@all" />-->
+    <!--</f:websocket>-->
 
     <h:outputScript library="js" name="jquery.js" target="body"/>
     <h:outputScript library="js" name="departure-board.js" target="body"/>
     <h:outputScript library="js" name="demo2.js" target="body"/>
-    <h:outputScript library="js" name="updateScript.js" target="body"/>
+    <h:outputScript library="js" name="socketListener.js" target="body"/>
+
 
 </h:body>
 </html>

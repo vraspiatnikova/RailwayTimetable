@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:b="http://bootsfaces.net/ui"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+<h:head>
+    <title>BootsFaces Basic Page</title>
+</h:head>
+<h:body>
+    <b:container>
+        <b:form horizontal="true">
+            <b:formGroup>
+            <b:selectOneMenu id="select"
+                             label="Select the station"
+                             value="#{boardController.stationName}">
+                <f:selectItem itemValue="#{null}" itemLabel="Select station"/>
+                <f:selectItems value="#{stationController.stations}"
+                               var="station" itemValue="#{station}" itemLabel="#{station}"/>
+                <f:ajax event="change" listener="#{boardController.setStationName(station)}" render=":form:table"/>
+            </b:selectOneMenu>
+            </b:formGroup>
+            <!--<h:outputText id="display" value="#{boardController.stationName}"/>-->
+
+        </b:form>
+
+
+        <h:form id="form">
+            <b:dataTable id="table" value="#{boardController.boards}"
+                     var="board" searching="false" paginated="false" lang="en">
+                <b:dataTableColumn>
+                    <f:facet name="header">Train name</f:facet>
+                    #{board.trainName}
+                </b:dataTableColumn>
+                <b:dataTableColumn>
+                    <f:facet name="header">Route</f:facet>
+                    #{board.route}
+                </b:dataTableColumn>
+                <b:dataTableColumn>
+                    <f:facet name="header">Departure date</f:facet>
+                    #{board.arrivaDatelTime}
+                </b:dataTableColumn>
+                <b:dataTableColumn>
+                    <f:facet name="header">Arrival date</f:facet>
+                    #{board.depatureDateTime}
+                </b:dataTableColumn>
+            </b:dataTable>
+    </h:form>
+
+        <f:websocket channel="push">
+            <f:ajax event="updateTable" render=":form:table"/>
+        </f:websocket>
+
+    </b:container>
+</h:body>
+</html>

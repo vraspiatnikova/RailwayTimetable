@@ -2,6 +2,7 @@ package com.tsystems.jschool.railway.beans;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import org.apache.log4j.Logger;
 import org.jboss.resteasy.client.jaxrs.ResteasyClient;
 import org.jboss.resteasy.client.jaxrs.ResteasyClientBuilder;
 import org.jboss.resteasy.client.jaxrs.ResteasyWebTarget;
@@ -21,6 +22,7 @@ import java.util.List;
 @ApplicationScoped
 public class StationController {
 
+    private static final Logger LOGGER = Logger.getLogger(StationController.class);
     private List<String> stations;
     private ObjectMapper mapper;
     private static final String STATION_NAMES_URL = "http://localhost:8080/jschool-1.0/getAllStations";
@@ -53,7 +55,7 @@ public class StationController {
                         });
 
             } catch (IOException e) {
-                e.printStackTrace();
+                LOGGER.error(e.getMessage(), e);
             }
             stations = list;
         }
