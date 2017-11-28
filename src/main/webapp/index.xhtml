@@ -11,19 +11,17 @@
 </h:head>
 <h:body>
     <b:container>
+        <h1>Railway Timetable</h1>
+        <hr />
         <b:form horizontal="true">
             <b:formGroup>
-            <b:selectOneMenu id="select"
-                             label="Select the station"
-                             value="#{boardController.stationName}">
-                <f:selectItem itemValue="#{null}" itemLabel="Select station"/>
-                <f:selectItems value="#{stationController.stations}"
-                               var="station" itemValue="#{station}" itemLabel="#{station}"/>
-                <f:ajax event="change" listener="#{boardController.setStationName(station)}" render=":form:table"/>
-            </b:selectOneMenu>
+                <b:inputText value="#{boardController.stationName}"
+                             placeholder="Select the station"
+                             typeahead="true" typeahead-values="#{stationController.stations}"
+                             tiny-screen="full-width"
+                             ajax="true"
+                             update=":form:table"/>
             </b:formGroup>
-            <!--<h:outputText id="display" value="#{boardController.stationName}"/>-->
-
         </b:form>
 
 
