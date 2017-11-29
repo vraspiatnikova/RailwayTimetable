@@ -32,6 +32,7 @@ public class BoardService {
     public boolean isBoardsContainsId(String msg){
         String[] arr = msg.split(" ");
         int id = Integer.parseInt(arr[1]);
+        LOGGER.info("try to check if boards contains id (" + id + ")");
         for (Board board: boards){
             if (board.getBoardId() == id) return true;
         }
@@ -55,6 +56,7 @@ public class BoardService {
     public void updateOneBoard(String msg){
         String[] arr = msg.split(" ");
         int id = Integer.parseInt(arr[1]);
+        LOGGER.info("try to update board with id (" + id + ")");
         int delta = Integer.parseInt(arr[2]);
         for (Board board: boards){
             if (board.getBoardId() == id){

@@ -46,6 +46,7 @@ public class StationController {
     }
 
     private void loadStations() {
+        LOGGER.info("try to load stations");
         String jsonString = update(STATION_NAMES_URL );
         if (jsonString != null) {
             List<String> list = null;
